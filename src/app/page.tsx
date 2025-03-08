@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import Navbar from "../components/NavBar";
 
 export default function Home() {
   const [navbarOffset, setNavbarOffset] = useState(0);
@@ -33,19 +34,7 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header} style={{ transform: `translateY(${navbarOffset}px)`, transition: "transform 0.4s ease-out" }}>
-        <nav className={styles.navbar}>
-          <a href="/" className={styles.logoLink}>
-            <Image className={styles.navLogo} src="/CUBERT.png" alt="Cubert Logo" width={50} height={50} />
-          </a>
-          <div className={styles.navLinks}>
-            <a href="#meet-eboard" className={styles.navItem}>Meet EBoard</a>
-            <a href="#events-calendar" className={styles.navItem}>Events/Calendar</a>
-            <a href="#contact" className={styles.navItem}>Contact</a>
-          </div>
-          <div className={styles.navIndicator}></div>
-        </nav>
-      </header>
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.heroContainer}>
           <Image className={styles.heroLogo} src="/RCC_LOGO.png" alt="NYU RCC Logo" width={250} height={250} />
@@ -87,7 +76,7 @@ export default function Home() {
         </section>
 
         <div className={styles.ctas}>
-          <a className={styles.primary} href="#">Join Now</a>
+          <a className={styles.primary} href="https://engage.nyu.edu/organization/rubiks-cube-club">Join Now</a>
           <a href="#" className={styles.secondary}>Learn More</a>
         </div>
       </main>

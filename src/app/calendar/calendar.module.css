@@ -1,0 +1,123 @@
+/* Calendar Page Styles */
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #A8D0E6, #F8E9A1);
+    color: #24305E;
+    padding-top: 80px;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 20px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .calendarContainer {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* FullCalendar Theming */
+  .fc {
+    background: white !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .fc-toolbar {
+    background: #F76C6C;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .fc-button {
+    background: #374785 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .fc-button:hover {
+    background: #F8E9A1 !important;
+    color: #24305E !important;
+  }
+  
+  .fc-daygrid-day-number {
+    color: #374785;
+    font-weight: bold;
+  }
+  
+  .fc-event {
+    background: #F76C6C !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out !important;
+  }
+  
+  .fc-event:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Modal Styling */
+  .eventModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    text-align: center;
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .modalClose {
+    margin-top: 10px;
+    background: #F76C6C;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .modalClose:hover {
+    background: #d94f4f;
+  }
+  
