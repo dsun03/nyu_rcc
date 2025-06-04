@@ -1,0 +1,96 @@
+/* Leaderboard.module.css */
+.leaderboardContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100vw;
+}
+
+.leaderboard {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.buttonContainer button {
+  background-color: #F76C6C;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buttonContainer button:hover {
+  background-color: #d94f4f;
+}
+
+.buttonContainer button:focus {
+  outline: 2px solid #d94f4f;
+  outline-offset: 2px;
+}
+
+  
+.submitForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.formLabel input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db; /* Tailwind gray-300 */
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.formLabel input:focus {
+  border-color: #d94f4f; /* Tailwind blue-600 */
+}
+
+.formLabel button {
+  background-color: #F76C6C;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.formLabel button:hover {
+  background-color: #d94f4f;
+}

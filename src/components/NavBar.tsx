@@ -31,6 +31,7 @@ export default function NavBar() {
           <Link href="/meet-eboard" className={styles.navItem}>Meet EBoard</Link>
           <Link href="/calendar" className={styles.navItem}>Events/Calendar</Link>
           <Link href="/contact" className={styles.navItem}>Contact</Link>
+          <Link href="/leaderboard" className={styles.navItem}>Leaderboard</Link>
         </div>
       </nav>
     </header>
