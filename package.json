@@ -14,9 +14,11 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.10",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20",

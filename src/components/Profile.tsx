@@ -2,10 +2,10 @@ import styles from './Profile.module.css'
 
 type Player = {
   img: string
-  name: string
-  location: string
-  time: number
-  dt: string
+  email: string
+  full_name: string
+  solve_time: number
+  created_at: string
 }
 
 export default function Profile({ Leaderboard }: { Leaderboard: Player[] }) {
@@ -18,13 +18,13 @@ function Item(data: Player[]) {
       {data.map((value, index) => (
         <div key={index} className={styles.card}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={value.img} alt={value.name} className={styles.avatar} />
+            <img src='./CUBERT.png' alt={value.email} className={styles.avatar} />
             <div className={styles.info}>
-              <h3 className={styles.name}>{value.name}</h3>
-              <span className={styles.location}>{value.dt}</span>
+              <h3 className={styles.name}>{value.full_name}</h3>
+              <span className={styles.location}>{value.created_at.slice(0, 10)}</span>
             </div>
           </div>
-          <div className={styles.time}>{value.time}</div>
+          <div className={styles.time}>{value.solve_time}</div>
         </div>
       ))}
     </>
