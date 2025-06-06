@@ -16,7 +16,7 @@ export default function MeetEBoardPage() {
   return (
     <div className={styles.page}>
       <Navbar />
-      <main className={styles.main}>
+      <main className={styles.mainContent}>
         <h1 className={styles.title}>Meet the E-Board</h1>
         <p className={styles.description}>Get to know our club&#39;s executive board members!</p>
         
