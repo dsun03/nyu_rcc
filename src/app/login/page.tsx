@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabaseServerClient';
 import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
 import styles from '../page.module.css';
 import loginStyles from './login.module.css';
 
@@ -11,12 +10,11 @@ export default function LoginForm() {
 
     // 1. Create a Supabase client
     const supabase= await createClient();
-    const origin = (await headers()).get('origin');
-    // 2. Sign in with GitHub
+    
     const { error, data } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`, // safer
       },
     });
 
