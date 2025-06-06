@@ -19,12 +19,13 @@ function Item(data: Player[]) {
         <div key={index} className={styles.card}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img src='./CUBERT.png' alt={value.email} className={styles.avatar} />
+            <h1 className={styles.rank}>{index+1}</h1>
             <div className={styles.info}>
               <h3 className={styles.name}>{value.full_name}</h3>
               <span className={styles.location}>{value.created_at.slice(0, 10)}</span>
             </div>
           </div>
-          <div className={styles.time}>{value.solve_time}</div>
+          <div className={styles.time}>{value.solve_time.toFixed(3)}</div>
         </div>
       ))}
     </>

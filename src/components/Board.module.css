@@ -41,48 +41,45 @@
   outline: 2px solid #d94f4f;
   outline-offset: 2px;
 }
-
-  
 .submitForm {
   display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 400px;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .formLabel {
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-  gap: 0.75rem;
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 400px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
-.formLabel input {
+.submitForm input {
   width: 100%;
+  max-width: 350px;
   padding: 0.6rem 1rem;
   font-size: 1rem;
-  border: 1px solid #d1d5db; /* Tailwind gray-300 */
+  border: 1px solid #d1d5db; /* gray-300 */
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
-.formLabel input:focus {
-  border-color: #d94f4f; /* Tailwind blue-600 */
+.submitForm input:focus {
+  border-color: #d94f4f;
 }
 
-.formLabel button {
+.submitForm button {
   background-color: #F76C6C;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.4rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -91,6 +88,60 @@
   transition: background-color 0.2s ease;
 }
 
-.formLabel button:hover {
+.submitForm button:hover {
   background-color: #d94f4f;
+}
+
+.statsContainer {
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  text-align: center;
+}
+
+.statsHeader {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.statsContent {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.statBox {
+  background-color: #ffffff;
+  padding: 1.2rem 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 160px;         /* Enough space for long values */
+  max-width: 180px;         /* Prevents it from stretching too much */
+  overflow-wrap: break-word; /* Allows values to wrap properly */
+  word-break: break-word;    /* Fallback for older values */
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  word-break: break-word;     /* Prevent overflow from long words */
+}
+
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
 }

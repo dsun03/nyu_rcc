@@ -9,7 +9,7 @@ export default function AuthCallback() {
   useEffect(() => {
     // Wait briefly to ensure Supabase cookies are set
     const timer = setTimeout(() => {
-      router.push('/')
+      router.push('/leaderboard')
     }, 1500) // optional buffer
 
     return () => clearTimeout(timer)
