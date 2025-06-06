@@ -5,39 +5,39 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavBar.module.css";
 import { createClient } from "@/lib/supabaseBrowserClient";
-import type { User } from '@supabase/supabase-js'
+import type { User } from '@supabase/supabase-js';
 
 export default function NavBar() {
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [user, setUser] = useState<User | null>(null)
-  const supabase = createClient()
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
 
   const handleSignOut = async (e: { preventDefault: () => void; })=>{
-    e.preventDefault()
-    const { error } = await supabase.auth.signOut()
+    e.preventDefault();
+    const { error } = await supabase.auth.signOut();
     if (error){
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-      console.log(user)
-    }
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      console.log(user);
+    };
 
-    getUser()
+    getUser();
     
 
     // Optional: listen for auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null)
-    })
+      setUser(session?.user || null);
+    });
 
     return () => {
-      authListener.subscription.unsubscribe()
-    }
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {

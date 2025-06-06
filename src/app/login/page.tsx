@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { createClient } from '@/lib/supabaseServerClient';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
@@ -46,5 +45,5 @@ export default function LoginForm() {
             </main>
         </div>
     </>
-  )
+  );
 }

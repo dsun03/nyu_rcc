@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Profile from './Profile';
 import styles from './Board.module.css';
 import { createClient } from '@/lib/supabaseBrowserClient';
@@ -7,11 +7,17 @@ import { redirect } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 
 const supabase = createClient();
-
+type Player = {
+  img: string
+  email: string
+  full_name: string
+  solve_time: number
+  created_at: string
+}
 export default function Board() {
   const [period, setPeriod] = useState(0);
   const [inputVal, setInputVal] = useState('');
-  const [data, setData] = useState<any[] | null>(null);
+  const [data, setData] = useState<Player[] | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [solveTime, setSolveTime] = useState<string>('');
   const [rank, setRank] = useState<string>('');
@@ -37,7 +43,7 @@ export default function Board() {
     if (error) {
       console.error('Error fetching solve time:', error);
     } else {
-      console.log(data)
+      console.log(data);
       setSolveTime(data?.solve_time || '');
     }
   };
@@ -48,17 +54,17 @@ export default function Board() {
     });
 
     if (error){
-      console.error('Error fetching rank', error.message)
+      console.error('Error fetching rank', error.message);
     }
     else{
-      setRank(data?.[0].rank)
+      setRank(data?.[0].rank);
     }
-  }
+  };
   // Submit or update time
   const submitSolveTime = async () => {
-    if (!user) return;
+    if (!user) {return;}
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('leaderboard')
       .upsert(
         [
@@ -67,6 +73,7 @@ export default function Board() {
             full_name: user.user_metadata.full_name,
             solve_time: inputVal,
             email: user.email,
+            created_at: new Date().toISOString()
           },
         ],
         { onConflict: 'user_id' }
@@ -93,9 +100,9 @@ export default function Board() {
       } = await supabase.auth.getUser();
       setUser(user);
       if (user?.id) {
-        await fetchSolveTime(user.id)
-        await fetchRank(user.id)
-      };
+        await fetchSolveTime(user.id);
+        await fetchRank(user.id);
+      }
     };
 
     init();
@@ -104,7 +111,7 @@ export default function Board() {
       (_event, session) => {
         const updatedUser = session?.user || null;
         setUser(updatedUser);
-        if (updatedUser?.id) fetchSolveTime(updatedUser.id);
+        if (updatedUser?.id) {fetchSolveTime(updatedUser.id);}
       }
     );
 
@@ -115,7 +122,7 @@ export default function Board() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputVal.trim()) submitSolveTime();
+    if (inputVal.trim()) {submitSolveTime();}
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -126,6 +133,18 @@ export default function Board() {
     e.preventDefault();
     redirect('/login');
   };
+  // Filter helper
+  function filterByDate(data: Player[], days: number) {
+    if (days === 0) {return [...data].sort((a, b) => a.solve_time - b.solve_time);}
+
+    const today = new Date();
+    const cutoff = new Date();
+    cutoff.setDate(today.getDate() - days);
+
+    return data
+      .filter((val) => new Date(val.created_at) >= cutoff)
+      .sort((a, b) => a.solve_time - b.solve_time);
+  }
 
   return (
     <div className={styles.leaderboardContainer}>
@@ -185,15 +204,3 @@ export default function Board() {
   );
 }
 
-// Filter helper
-function filterByDate(data: any[], days: number) {
-  if (days === 0) return [...data].sort((a, b) => a.solve_time - b.solve_time);
-
-  const today = new Date();
-  const cutoff = new Date();
-  cutoff.setDate(today.getDate() - days);
-
-  return data
-    .filter((val) => new Date(val.created_at) >= cutoff)
-    .sort((a, b) => a.solve_time - b.solve_time);
-}

@@ -1,8 +1,6 @@
-import { useState } from "react";
-import Board from "../../components/Board"
+import Board from "../../components/Board";
 import Navbar from "../../components/NavBar";
 import styles from "./leaderboard.module.css";
-import { addTimeToDatabase } from "@/components/database";
 
 export default function Leaderboard(){
 
@@ -19,6 +17,6 @@ export default function Leaderboard(){
             </main>
         </div>
         </>
-    )
+    );
 }
 

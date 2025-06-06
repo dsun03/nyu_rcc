@@ -18,7 +18,7 @@ export default function MeetEBoardPage() {
       <Navbar />
       <main className={styles.main}>
         <h1 className={styles.title}>Meet the E-Board</h1>
-        <p className={styles.description}>Get to know our club's executive board members!</p>
+        <p className={styles.description}>Get to know our club&#39;s executive board members!</p>
         
         <div className={styles.cardContainer} style={{ display: "flex", justifyContent: "center", gap: "30px", flexWrap: "wrap" }}>
           {eboardMembers.map((member, index) => (

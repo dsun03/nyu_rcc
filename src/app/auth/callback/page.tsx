@@ -1,19 +1,20 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from '../../page.module.css';
 
 export default function AuthCallback() {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     // Wait briefly to ensure Supabase cookies are set
     const timer = setTimeout(() => {
-      router.push('/leaderboard')
-    }, 1500) // optional buffer
+      router.push('/leaderboard');
+    }, 1500); // optional buffer
 
-    return () => clearTimeout(timer)
-  }, [router])
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
     <div style={{
@@ -24,26 +25,8 @@ export default function AuthCallback() {
       flexDirection: 'column',
       fontFamily: 'sans-serif'
     }}>
-      <div className="spinner" />
+      <div className= {styles.spinner} />
       <p>Signing you in...</p>
-
-      <style jsx>{`
-        .spinner {
-          width: 40px;
-          height: 40px;
-          border: 4px solid rgba(0, 0, 0, 0.1);
-          border-top-color: #000;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
-  )
+  );
 }

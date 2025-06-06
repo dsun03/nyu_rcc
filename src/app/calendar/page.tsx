@@ -16,10 +16,10 @@ interface EventType {
 }
 
 export default function CalendarPage() {
-  const [events, setEvents] = useState<EventType[]>([
-    { title: "NYU RCC Meetup", date: "2025-03-15", description: "Join us for a fun meetup!" },
-    { title: "Speedcubing Tournament", date: "2025-03-20", description: "Compete in our speedcubing tournament!" },
-  ]);
+  const events = [
+    { title: "NYU RCC Meetup", date: "2025-06-15", description: "Join us for a fun meetup!" },
+    { title: "Speedcubing Tournament", date: "2025-06-20", description: "Compete in our speedcubing tournament!" },
+  ];
 
   const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 

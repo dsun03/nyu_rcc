@@ -1,4 +1,4 @@
-import styles from './Profile.module.css'
+import styles from './Profile.module.css';
 
 type Player = {
   img: string
@@ -7,11 +7,6 @@ type Player = {
   solve_time: number
   created_at: string
 }
-
-export default function Profile({ Leaderboard }: { Leaderboard: Player[] }) {
-  return <div>{Item(Leaderboard)}</div>
-}
-
 function Item(data: Player[]) {
   return (
     <>
@@ -29,5 +24,10 @@ function Item(data: Player[]) {
         </div>
       ))}
     </>
-  )
+  );
 }
+export default function Profile({ Leaderboard }: { Leaderboard: Player[] }) {
+  return <div>{Item(Leaderboard)}</div>;
+}
+
+
