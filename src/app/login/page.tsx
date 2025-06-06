@@ -6,25 +6,26 @@ import loginStyles from './login.module.css';
 
 export default function LoginForm() {
   const signIn = async () => {
-    'use server';
+  'use server';
+  console.log('[SERVER] signIn called');
 
-    // 1. Create a Supabase client
-    const supabase= await createClient();
-    
-    const { error, data } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`, // safer
-      },
-    });
+  const supabase = await createClient();
+  console.log('[SERVER] Supabase client created');
 
-    if (error) {
-      console.log(error);
-    } else {
-      return redirect(data.url);
-    }
-    // 3. Redirect to landing page
-  };
+  const { error, data } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+    },
+  });
+
+  if (error) {
+    console.error('[SERVER] OAuth error:', error.message);
+  } else {
+    console.log('[SERVER] Redirecting to:', data.url);
+    return redirect(data.url);
+  }
+};
 
 
   return (<>

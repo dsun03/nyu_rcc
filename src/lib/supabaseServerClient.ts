@@ -15,11 +15,12 @@ export async function createClient() {
         setAll(cookiesToSet) {
           try {
             cookiesToSet.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, options);
+              options.secure = true;
               console.log(`[COOKIE SET] ${name} = ${value}`, options);
+              cookieStore.set(name, value, options);
             });
           } catch (err) {
-            console.warn('Could not set cookies in Server Component context.', err);
+            console.warn('[COOKIE ERROR] Could not set cookies in Server Component context.', err);
           }
         },
       },

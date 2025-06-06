@@ -8,12 +8,16 @@ export default function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    // Wait briefly to ensure Supabase cookies are set
+    console.log('[CLIENT] AuthCallback useEffect triggered');
     const timer = setTimeout(() => {
+      console.log('[CLIENT] Redirecting to /leaderboard');
       router.push('/leaderboard');
-    }, 1500); // optional buffer
+    }, 1500);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      console.log('[CLIENT] Timer cleared');
+    };
   }, [router]);
 
   return (
