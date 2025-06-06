@@ -38,7 +38,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.heroContainer}>
           <Image className={styles.heroLogo} src="/RCC_LOGO.png" alt="NYU RCC Logo" width={250} height={250} />
-          <h1 className={styles.heroTitle}>NYU Rubik's Cube Club</h1>
+          <h1 className={styles.heroTitle}>NYU Rubik&#39;s Cube Club</h1>
         </div>
 
         <section className={styles.contentSection}>

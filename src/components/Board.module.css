@@ -1,0 +1,147 @@
+/* Leaderboard.module.css */
+.leaderboardContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100vw;
+}
+
+.leaderboard {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.buttonContainer button {
+  background-color: #F76C6C;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buttonContainer button:hover {
+  background-color: #d94f4f;
+}
+
+.buttonContainer button:focus {
+  outline: 2px solid #d94f4f;
+  outline-offset: 2px;
+}
+.submitForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 400px;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.formLabel {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.submitForm input {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.submitForm input:focus {
+  border-color: #d94f4f;
+}
+
+.submitForm button {
+  background-color: #F76C6C;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitForm button:hover {
+  background-color: #d94f4f;
+}
+
+.statsContainer {
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  text-align: center;
+}
+
+.statsHeader {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.statsContent {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.statBox {
+  background-color: #ffffff;
+  padding: 1.2rem 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 160px;         /* Enough space for long values */
+  max-width: 180px;         /* Prevents it from stretching too much */
+  overflow-wrap: break-word; /* Allows values to wrap properly */
+  word-break: break-word;    /* Fallback for older values */
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  word-break: break-word;     /* Prevent overflow from long words */
+}
+
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}

@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <div className={styles.page}>
       <Navbar />
-      <main className={styles.main}>
+      <main className={styles.mainContent}>
         <h1 className={styles.title}>Contact Us</h1>
         <p className={styles.description}>Reach out to us through our social media platforms:</p>
         

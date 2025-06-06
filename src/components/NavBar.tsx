@@ -4,10 +4,42 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./NavBar.module.css";
+import { createClient } from "@/lib/supabaseBrowserClient";
+import type { User } from '@supabase/supabase-js';
 
 export default function NavBar() {
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+
+  const handleSignOut = async (e: { preventDefault: () => void; })=>{
+    e.preventDefault();
+    const { error } = await supabase.auth.signOut();
+    if (error){
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      console.log(user);
+      console.log(document.cookie);
+    };
+
+    getUser();
+    
+
+    // Optional: listen for auth changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +63,9 @@ export default function NavBar() {
           <Link href="/meet-eboard" className={styles.navItem}>Meet EBoard</Link>
           <Link href="/calendar" className={styles.navItem}>Events/Calendar</Link>
           <Link href="/contact" className={styles.navItem}>Contact</Link>
+          <Link href="/leaderboard" className={styles.navItem}>Leaderboard</Link>
+          {user && <div className={styles.navItem}>{user.user_metadata.full_name}</div>}
+          {user && <div className={styles.navItem} onClick={handleSignOut}>Sign Out!</div>}
         </div>
       </nav>
     </header>
