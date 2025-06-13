@@ -28,13 +28,13 @@ export async function GET(request: Request) {
       return NextResponse.redirect(redirectUrl); // Redirect to your protected route
     } else {
       console.error('[ROUTE HANDLER] Error exchanging code for session:', sessionError);
-      const redirectUrl = requestUrl.origin + '/auth/error?message=' + encodeURIComponent(sessionError.message);
+      const redirectUrl = requestUrl.origin + '/leaderboard' + '/auth/error?message=' + encodeURIComponent(sessionError.message);
       return NextResponse.redirect(redirectUrl);
     }
   }
 
   // Fallback in case no code is present but no error either
   console.log('[ROUTE HANDLER] No code or error in callback URL. Redirecting to home or login.');
-  const redirectUrl = requestUrl.origin + '/';
+  const redirectUrl = requestUrl.origin + '/leaderboard';
   return NextResponse.redirect(redirectUrl);
 }
