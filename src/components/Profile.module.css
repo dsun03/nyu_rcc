@@ -49,3 +49,49 @@
 .rank{
   margin: 1rem;
 }
+
+.leaderboardHeader {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f6e05e;
+  text-shadow: 0 0 8px rgba(246, 224, 94, 0.6);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+
+.leaderboardContainer {
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, #1a202c, #7c91b4);
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 2px solid #f6ad55; /* Gold-like */
+
+}
+
+.gold {
+  background: linear-gradient(135deg, #fffbea, #C9B037);
+  border: 2px solid #f6ad55;
+}
+
+.silver {
+  background: linear-gradient(135deg, #edf2f7, #b4b4b4a4);
+  border: 2px solid #cbd5e0;
+}
+
+.bronze {
+  background: linear-gradient(135deg, #fefae0, #6A3805);
+  border: 2px solid #924c07;
+}
+
+.gold .time,
+.silver .time,
+.bronze .time {
+  color: white;
+  font-size: 1.5rem;
+  -webkit-text-stroke: 1px rgba(161, 161, 161, 0.664);
+}

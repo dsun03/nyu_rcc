@@ -25,7 +25,10 @@ export default function Board() {
 
   // Fetch leaderboard data
   const fetchLeaderboard = async () => {
-    const { data, error } = await supabase.from('leaderboard').select();
+    const { data, error } = await supabase
+      .from('leaderboard')
+      .select()
+      .limit(10);
     if (error) {
       console.error('Error fetching leaderboard:', error);
     } else {
@@ -123,11 +126,14 @@ export default function Board() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputVal.trim() && parseFloat(inputVal)>0){
+    const time = inputVal.trim();
+    if (time && parseFloat(inputVal)>0){
       submitSolveTime();
       setSubmitError('');
-    }else if (inputVal.trim()===''){
+    }else if (time===''){
       setSubmitError('Please input your time.');
+    }else if (parseFloat(time) < 0){
+      setSubmitError('Your time must be greater than 0.');
     }
     
   };
@@ -155,7 +161,7 @@ export default function Board() {
 
   return (
     <div className={styles.leaderboardContainer}>
-      <h1 className={styles.leaderboard}>Leaderboard</h1>
+      <h1 className={styles.leaderboard}>3x3 Rubik&apos;s Cube Leaderboard</h1>
 
       <div className={styles.buttonContainer}>
         <button onClick={handleClick} data-id="7">
@@ -194,9 +200,7 @@ export default function Board() {
         {user ? (
           <>
             <input
-              type="number"
-              min = "0"
-              step = "0.01"
+              type="text"
               placeholder="Enter time here"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
