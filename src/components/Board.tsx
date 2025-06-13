@@ -16,7 +16,8 @@ type Player = {
 }
 export default function Board() {
   const [period, setPeriod] = useState(0);
-  const [inputVal, setInputVal] = useState('');
+  const [inputMins, setInputMins] = useState('');
+  const [inputSecs, setInputSecs] = useState('');
   const [data, setData] = useState<Player[] | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [solveTime, setSolveTime] = useState<string>('');
@@ -75,7 +76,7 @@ export default function Board() {
           {
             user_id: user.id,
             full_name: user.user_metadata.full_name,
-            solve_time: inputVal,
+            solve_time: (parseInt(inputMins) || 0) * 60 + (parseFloat(inputSecs) || 0),
             email: user.email,
             created_at: new Date().toISOString()
           },
@@ -87,7 +88,8 @@ export default function Board() {
     if (error) {
       console.error('Error submitting solve time:', error);
     } else {
-      setInputVal('');
+      setInputSecs('');
+      setInputMins('');
       fetchLeaderboard();
       fetchSolveTime(user.id);
       fetchRank(user.id);
@@ -126,16 +128,18 @@ export default function Board() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const time = inputVal.trim();
-    if (time && parseFloat(inputVal)>0){
+  
+    const minVal = parseFloat(inputMins.trim() || '0');
+    const secVal = parseFloat(inputSecs.trim() || '0');
+
+    if ((isNaN(minVal) && isNaN(secVal)) || (minVal === 0 && secVal === 0)) {
+      setSubmitError('Please input your time.');
+    } else if (minVal < 0 || secVal < 0) {
+      setSubmitError('Your time must be greater than 0.');
+    } else {
       submitSolveTime();
       setSubmitError('');
-    }else if (time===''){
-      setSubmitError('Please input your time.');
-    }else if (parseFloat(time) < 0){
-      setSubmitError('Your time must be greater than 0.');
-    }
-    
+    }    
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -157,6 +161,20 @@ export default function Board() {
     return data
       .filter((val) => new Date(val.created_at) >= cutoff)
       .sort((a, b) => a.solve_time - b.solve_time);
+  }
+  function formatTime(seconds: number) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    const ms = Math.round((seconds % 1) * 1000);
+
+    const pad = (n: number, z = 2) => String(n).padStart(z, '0');
+
+    let timeStr = "";
+
+    if (hrs > 0) {timeStr += `${hrs}:${pad(mins)}:${pad(secs)}.${pad(ms, 3)}`;}
+    else {timeStr += `${pad(mins)}:${pad(secs)}.${pad(ms, 3)}`;}
+    return timeStr;
   }
 
   return (
@@ -182,7 +200,7 @@ export default function Board() {
             <div className={styles.statBox}>
               <span className={styles.statLabel}>⏱ Solve Time</span>
               <span className={styles.statValue}>
-                {Number(solveTime).toFixed(3) || '—'}
+                {formatTime(parseFloat(solveTime)) || '-'}
               </span>
             </div>
             <div className={styles.statBox}>
@@ -196,24 +214,38 @@ export default function Board() {
       )}
 
       <form className={styles.submitForm} onSubmit={handleSubmit}>
-        <label className={styles.formLabel}>Add your time! (Seconds)</label>
+        <label className={styles.formLabel}>Update your PB!</label>
         {user ? (
           <>
-            <input
-              type="text"
-              placeholder="Enter time here"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-            />
+            <label className={styles.inputLabel}>
+              Minutes:
+              <input
+                type="number"
+                placeholder="Enter minutes here"
+                value={inputMins}
+                onChange={(e) => setInputMins(e.target.value)}
+              />
+            </label>
+            <label className={styles.inputLabel}>
+              Seconds:
+              <input
+                type="number"
+                max = "60"
+                step = "any"
+                placeholder="Enter seconds here"
+                value={inputSecs}
+                onChange={(e) => setInputSecs(e.target.value)}
+              />
+            </label>
             <button type="submit">Submit your time!</button>
-            {submitError && <span>{submitError}</span>}
+            {submitError && <span className={styles.submitError}>{submitError}</span>}
           </>
         ) : (
           <button onClick={goToLogin}>Sign in to add your time!</button>
         )}
       </form>
 
-      {data && <Profile Leaderboard={filterByDate(data, period)} />}
+      {data && <Profile Leaderboard={filterByDate(data, period)} timeFormat = {formatTime}/>}
     </div>
   );
 }

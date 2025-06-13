@@ -92,6 +92,11 @@
   background-color: #d94f4f;
 }
 
+.submitError{
+  color: red;
+  font-weight: bold;
+}
+
 .statsContainer {
   margin: 2.5rem auto;
   padding: 2rem;

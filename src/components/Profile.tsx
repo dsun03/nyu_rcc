@@ -7,35 +7,40 @@ type Player = {
   solve_time: number
   created_at: string
 }
-function Item(data: Player[]) {
-  return (
-    <div className={styles.leaderboardContainer}>
-      <h1 className={styles.leaderboardHeader}>Top 10 Solvers</h1>
-        {data.map((value, index) => (
-          <div key={index} className={`${styles.card} ${
-            index === 0
-              ? styles.gold
-              : index === 1
-              ? styles.silver
-              : index === 2
-              ? styles.bronze
-              : ''
-          }`}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img src='./CUBERT.png' alt={value.full_name} className={styles.avatar} />
-              <h1 className={styles.rank}>{index+1}</h1>
-              <div className={styles.info}>
-                <h3 className={styles.name}>{value.full_name}</h3>
-                <span className={styles.location}>{value.created_at.slice(0, 10)}</span>
+
+export default function Profile({ Leaderboard, timeFormat }: {
+                Leaderboard: Player[];
+                timeFormat: (seconds: number) => string;
+              }) {
+  function Item(data: Player[]) {
+    return (
+        <div className={styles.leaderboardContainer}>
+          <h1 className={styles.leaderboardHeader}>Top 10 Solvers</h1>
+            {data.map((value, index) => (
+              <div key={index} className={`${styles.card} ${
+                index === 0
+                  ? styles.gold
+                  : index === 1
+                  ? styles.silver
+                  : index === 2
+                  ? styles.bronze
+                  : ''
+              }`}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src='./CUBERT.png' alt={value.full_name} className={styles.avatar} />
+                  <h1 className={styles.rank}>{index+1}</h1>
+                  <div className={styles.info}>
+                    <h3 className={styles.name}>{value.full_name}</h3>
+                    <span className={styles.location}>{value.created_at.slice(0, 10)}</span>
+                  </div>
+                </div>
+                <div className={styles.time}>{timeFormat(value.solve_time)}</div>
               </div>
-            </div>
-            <div className={styles.time}>{value.solve_time.toFixed(3)}</div>
-          </div>
-        ))}
-    </div>
-  );
-}
-export default function Profile({ Leaderboard }: { Leaderboard: Player[] }) {
+            ))}
+        </div>
+      );
+    }
+
   return <div>{Item(Leaderboard)}</div>;
 }
 
