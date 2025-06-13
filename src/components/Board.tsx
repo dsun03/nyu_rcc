@@ -21,6 +21,7 @@ export default function Board() {
   const [user, setUser] = useState<User | null>(null);
   const [solveTime, setSolveTime] = useState<string>('');
   const [rank, setRank] = useState<string>('');
+  const [submitError, setSubmitError] = useState<string>('');
 
   // Fetch leaderboard data
   const fetchLeaderboard = async () => {
@@ -122,7 +123,13 @@ export default function Board() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputVal.trim()) {submitSolveTime();}
+    if (inputVal.trim() && parseFloat(inputVal)>0){
+      submitSolveTime();
+      setSubmitError('');
+    }else if (inputVal.trim()===''){
+      setSubmitError('Please input your time.');
+    }
+    
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -187,12 +194,15 @@ export default function Board() {
         {user ? (
           <>
             <input
-              type="text"
+              type="number"
+              min = "0"
+              step = "0.01"
               placeholder="Enter time here"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
             />
             <button type="submit">Submit your time!</button>
+            {submitError && <span>{submitError}</span>}
           </>
         ) : (
           <button onClick={goToLogin}>Sign in to add your time!</button>

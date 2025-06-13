@@ -13,7 +13,7 @@ function Item(data: Player[]) {
       {data.map((value, index) => (
         <div key={index} className={styles.card}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src='./CUBERT.png' alt={value.email} className={styles.avatar} />
+            <img src='./CUBERT.png' alt={value.full_name} className={styles.avatar} />
             <h1 className={styles.rank}>{index+1}</h1>
             <div className={styles.info}>
               <h3 className={styles.name}>{value.full_name}</h3>
