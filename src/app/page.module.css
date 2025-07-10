@@ -324,3 +324,54 @@
     transform: rotate(360deg);
   }
 }
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 10px;;
+}
+
+.cardLinkWrapper {
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.card {
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.card img {
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.handle {
+  font-weight: bold;
+  color: #3b49df;
+}

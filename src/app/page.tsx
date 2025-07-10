@@ -44,8 +44,7 @@ export default function Home() {
         <section className={styles.contentSection}>
           <div className={`${styles.textBox} ${styles.leftAlign}`}> 
             <h2>About the Club</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel dui eu sem fringilla consequat. Vivamus nec magna a elit pharetra tincidunt.</p>
-            <p>Curabitur venenatis ex non nulla cursus, ut gravida magna sollicitudin. Nulla facilisi. Ut ultricies, justo ac malesuada scelerisque, augue nisl euismod urna, sed posuere lectus purus sit amet arcu.</p>
+            <p>The Rubik’s Cube Club at NYU is here to bring together a community of students who love solving puzzles, especially cubes! The club is open for everyone, no matter your skill level. At our meetings, you can learn how to solve a cube, compete, and hang out with us!</p>
           </div>
         </section>
 
@@ -70,8 +69,7 @@ export default function Home() {
         <section className={styles.contentSection}>
           <div className={`${styles.textBox} ${styles.rightAlign}`}>
             <h2>Why Join?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Integer dapibus suscipit justo, et congue ligula tempus id.</p>
-            <p>Fusce non magna arcu. Aenean quis velit sed nisl aliquet faucibus. In hac habitasse platea dictumst. Donec sodales urna sit amet libero tincidunt, eget venenatis erat tincidunt.</p>
+            <p>If you love twisty puzzles, the Rubik&#39;s Cube Club is the place to be. We have regular fun events, including cube and chill, cube tutorials, and our special cube art events where we build a fun image with mini cubes! Hope to see you there!</p>
           </div>
         </section>
 

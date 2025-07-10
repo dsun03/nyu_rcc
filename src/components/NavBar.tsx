@@ -24,8 +24,8 @@ export default function NavBar() {
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
-      console.log(user);
-      console.log(document.cookie);
+      //console.log(user);
+      //console.log(document.cookie);
     };
 
     getUser();

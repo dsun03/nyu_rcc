@@ -6,6 +6,31 @@ import Image from "next/image";
 import styles from "../page.module.css";
 
 export default function ContactPage() {
+  const contacts = [
+    {
+      name: 'Instagram',
+      description: 'Follow us for updates and event photos!',
+      href: 'https://instagram.com/nyu_rcc',
+      image: '/instagram.png',
+      handle: '@nyu_rcc',
+    },
+    {
+      name: 'NYU Engage',
+      description: 'Contact us on Engage!',
+      href: 'https://nyu.campuslabs.com/engage/organization/rubiks-cube-club/contact',
+      image: '/email.png',
+      handle: 'Here',
+    },
+    {
+      name: 'Discord',
+      description: 'Join our community to chat and get involved!',
+      href: 'https://discord.com/invite/H7R67vTeK8',
+      image: '/discord.png',
+      handle: 'Join Here',
+    },
+  ];
+
+
   return (
     <div className={styles.page}>
       <Navbar />
@@ -13,30 +38,24 @@ export default function ContactPage() {
         <h1 className={styles.title}>Contact Us</h1>
         <p className={styles.description}>Reach out to us through our social media platforms:</p>
         
-        <div className={`${styles.cardContainer} ${styles.flexContainer}`} style={{ display: "flex", flexWrap: "wrap", gap: "4rem", marginTop: "3rem" }}>
-          {/* Instagram Card */}
-            <div className={`${styles.textBox} ${styles.leftAlign}`} style={{ flex: "1", minWidth: "300px", maxWidth: "400px" }}>
-                <Image src="/instagram.png" alt="Instagram Logo" width={100} height={100} />
-                <h2>Instagram</h2>
-                <p>Follow us for updates and event photos!</p>
-                <Link href="#"><span className={styles.cardLink}>@nyu_rcc</span></Link>
-            </div>
-
-          {/* Email Card */}
-            <div className={`${styles.textBox} ${styles.rightAlign}`} style={{ flex: "1", minWidth: "300px", maxWidth: "400px" }}>
-                <Image src="/email.png" alt="Email Logo" width={100} height={100} />
-                <h2>NYU Engage</h2>
-                <p>Contact us on Engage!</p>
-                <Link href="https://nyu.campuslabs.com/engage/organization/rubiks-cube-club/contact"><span className={styles.cardLink}></span>Here</Link>
-            </div>
-          
-          {/* Discord Card */}
-            <div className={`${styles.textBox} ${styles.rightAlign}`} style={{ flex: "1", minWidth: "300px", maxWidth: "400px" }}>
-                <Image src="/discord.png" alt="Discord Logo" width={100} height={100} />
-                <h2>Discord</h2>
-                <p>Join our community to chat and get involved!</p>
-                <Link href="https://discord.com/invite/H7R67vTeK8"><span className={styles.cardLink}>Join Here</span></Link>
-            </div>
+        <div className={styles.cardContainer}>
+          {contacts.map((contact, index) => (
+            <Link
+              key={index}
+              href={contact.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              passHref
+              className={styles.cardLinkWrapper}
+            >
+              <div className={styles.card}>
+                <Image src={contact.image} alt={`${contact.name} Logo`} width={100} height={100} />
+                <h2>{contact.name}</h2>
+                <p>{contact.description}</p>
+                <span className={styles.handle}>{contact.handle}</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </main>
     </div>
