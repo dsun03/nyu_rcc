@@ -130,77 +130,97 @@
 }
 
 /* Full-Width Image Slider */
+.galleryWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
 .sliderContainer {
   position: relative;
-  width: 100vw;
-  height: 800px;
+  width: 90vw;
+  max-width: 1000px;
+  height: auto;
   overflow: hidden;
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .slider {
   display: flex;
-  width: 300vw;
   transition: transform 0.5s ease-in-out;
+  width: 100%;
 }
 
-.slide {
-  width: 100vw;
-  height: 100%;
-  object-fit: cover;
+.slideWrapper {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f8f8;
 }
 
-.prevButton, .nextButton {
+.image {
+  max-height: 75vh;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Nav Buttons */
+.prevButton,
+.nextButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: #F76C6C;
   color: white;
   border: none;
-  font-size: 24px;
-  padding: 12px 18px;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 50px;
-  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
-  z-index: 10;
+  border-radius: 50%;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .prevButton {
-  left: 20px;
+  left: 10px;
 }
 
 .nextButton {
-  right: 20px;
+  right: 10px;
 }
 
-.prevButton:hover, .nextButton:hover {
-  background: #d94f4f;
-}
-
-/* Slide Indicator Dots */
+/* Dots */
 .sliderIndicators {
-  position: absolute;
-  bottom: 20px; /* Adjust position within the image */
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 1rem;
   display: flex;
   gap: 10px;
-  background: rgba(0, 0, 0, 0.4); /* Subtle background for visibility */
-  padding: 8px 12px;
-  border-radius: 20px;
+  justify-content: center;
 }
 
 .dot {
   height: 12px;
   width: 12px;
-  background-color: #D3D3D3;
+  background-color: #d3d3d3;
   border-radius: 50%;
   transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .activeDot {
-  background-color: #F76C6C;
+  background-color: #f76c6c;
   transform: scale(1.3);
 }
 
@@ -349,11 +369,6 @@
   cursor: pointer;
   text-align: center;
   height: 100%;
-}
-
-.card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
 }
 
 .card img {

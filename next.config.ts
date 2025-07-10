@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         hostname: 'gbrlflepbglmsvnhwpbq.supabase.co',
         pathname: '/storage/v1/object/public/profile-pics/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'gbrlflepbglmsvnhwpbq.supabase.co',
+        pathname: '/storage/v1/object/public/club-pics/pictures/**',
+      },
     ], 
   },
 };

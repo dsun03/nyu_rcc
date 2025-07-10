@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Navbar from "../components/NavBar";
+import { createClient } from '@/lib/supabaseBrowserClient';
 
 export default function Home() {
   const [navbarOffset, setNavbarOffset] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const supabase = createClient();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +23,43 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [navbarOffset, lastScrollY]);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const images = ["/image1.jpeg", "/image2.jpeg", "/image3.jpeg"];
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [images, setImages] = useState<string[]>([]);
+  
+  const fetchImages = async () =>{
+    const bucketName = 'club-pics';
+    const folderPath = 'pictures';
+    const { data: files, error: listError } = await supabase.storage
+      .from(bucketName)
+      .list(folderPath, {
+        limit: 100, 
+        offset: 0,
+      });
+
+    if (listError) {
+      console.error('Error listing files:', listError.message);
+      return;
+    }
+
+    if (!files || files.length === 0) {
+      console.log('No files found in the "pictures" folder.');
+      return;
+    }
+    
+    const imageUrls = files?.map(file =>{
+      const imageName = file.name;
+      return supabase.storage.from(bucketName).getPublicUrl(`pictures/${imageName}`).data.publicUrl;
+    });
+    console.log(imageUrls);
+
+  
+   setImages(imageUrls);
+    
+  };
+
+  useEffect(()=>{
+    fetchImages();
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -49,19 +86,41 @@ export default function Home() {
         </section>
 
         {/* Full-width Image Slider with Arrows and Indicators */}
-        <div className={styles.sliderContainer}>
-          <button className={styles.prevButton} onClick={prevSlide}>&#10094;</button>
-          <div className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}vw)`, transition: "transform 0.5s ease-in-out" }}>
-            {images.map((src, index) => (
-              <Image key={index} className={styles.slide} src={src} alt={`Club Event ${index + 1}`} width={1920} height={600} objectFit="cover" />
-            ))}
+        <div className={styles.galleryWrapper}>
+          <div className={styles.sliderContainer}>
+            <button className={styles.prevButton} onClick={prevSlide}>
+              &#10094;
+            </button>
+
+            <div
+              className={styles.slider}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {images.map((src, index) => (
+                <div key={index} className={styles.slideWrapper}>
+                  <img
+                    className={styles.image}
+                    src={src}
+                    alt={`Club Event ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <button className={styles.nextButton} onClick={nextSlide}>
+              &#10095;
+            </button>
           </div>
-          <button className={styles.nextButton} onClick={nextSlide}>&#10095;</button>
-          
-          {/* Slide Indicator Dots Positioned at Bottom of Image */}
+
           <div className={styles.sliderIndicators}>
             {images.map((_, index) => (
-              <span key={index} className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ""}`} onClick={() => setCurrentIndex(index)}></span>
+              <span
+                key={index}
+                className={`${styles.dot} ${
+                  index === currentIndex ? styles.activeDot : ''
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              />
             ))}
           </div>
         </div>
@@ -75,7 +134,6 @@ export default function Home() {
 
         <div className={styles.ctas}>
           <a className={styles.primary} href="https://engage.nyu.edu/organization/rubiks-cube-club">Join Now</a>
-          <a href="#" className={styles.secondary}>Learn More</a>
         </div>
       </main>
     </div>
