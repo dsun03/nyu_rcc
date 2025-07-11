@@ -1,7 +1,7 @@
 'use client';
 import Board from "../../components/Board";
 import Navbar from "../../components/NavBar";
-import styles from "./leaderboard.module.css";
+import styles from "../page.module.css";
 import { useEffect } from "react";
 
 export default function Leaderboard(){
@@ -27,7 +27,7 @@ export default function Leaderboard(){
     return (<>
         <div className={styles.page}>
             <Navbar/>
-            <main className={styles.main}>
+            <main className={styles.mainContent}>
                 
                 
                 <Board></Board>

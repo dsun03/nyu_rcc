@@ -64,8 +64,16 @@ export default function NavBar() {
           <Link href="/calendar" className={styles.navItem}>Events/Calendar</Link>
           <Link href="/contact" className={styles.navItem}>Contact</Link>
           <Link href="/leaderboard" className={styles.navItem}>Leaderboard</Link>
-          {user && <div className={styles.navItem}>{user.user_metadata.full_name}</div>}
-          {user && <div className={styles.navItem} onClick={handleSignOut}>Sign Out!</div>}
+          {user && (
+            <div className={styles.dropdownWrapper}>
+              <Link href="/leaderboard" className={styles.navItem} >{user.user_metadata.full_name} &#x25BC;</Link>
+              <div className={styles.dropdownMenu}>
+                <div className={styles.dropdownItem} onClick={handleSignOut}>
+                  Sign Out
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
     </header>
