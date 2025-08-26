@@ -3,7 +3,7 @@
   max-width: 900px;
   margin: 0 auto;
   border-radius: 12px;
-  width: 100vw;
+  width: 100%;
 }
 
 .leaderboard {
@@ -11,7 +11,7 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #1f2937;
+  color: rgb(36, 48, 94);
 }
 
 .buttonContainer {
@@ -149,3 +149,94 @@
   color: #6b7280;
   margin-bottom: 0.5rem;
 }
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 768px) {
+  .leaderboardContainer {
+    width: 100%;
+    padding: 0 1rem; /* side breathing room */
+  }
+
+  .leaderboard {
+    font-size: 28px; /* smaller heading */
+    margin-bottom: 1rem;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .buttonContainer button {
+    width: 100%;          /* full width buttons */
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .submitForm {
+    width: 100%;
+    padding: 1rem;
+    max-width: 100%;
+    box-shadow: none;      /* flatter on mobile */
+  }
+
+  .submitForm input {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .submitForm button {
+    width: 100%;           /* full width submit button */
+    font-size: 1rem;
+  }
+
+  .statsContainer {
+    padding: 1.2rem;
+    margin: 1.5rem auto;
+    width: 100%;
+  }
+
+  .statsHeader {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .statsContent {
+    flex-direction: column; /* stack instead of row */
+    gap: 1rem;
+  }
+
+  .statBox {
+    min-width: unset;
+    max-width: 100%;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .statValue {
+    font-size: 1rem;
+  }
+
+  .statLabel {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard {
+    font-size: 24px;
+  }
+
+  .buttonContainer button {
+    font-size: 0.9rem;
+  }
+
+  .statBox {
+    padding: 0.8rem;
+  }
+
+  .statValue {
+    font-size: 0.95rem;
+  }
+}
+

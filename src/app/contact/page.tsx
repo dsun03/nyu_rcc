@@ -3,7 +3,7 @@
 import Navbar from "../../components/NavBar";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../page.module.css";
+import styles from "./contact.module.css";
 
 export default function ContactPage() {
   return (
@@ -13,7 +13,7 @@ export default function ContactPage() {
         <h1 className={styles.title}>Contact Us</h1>
         <p className={styles.description}>Reach out to us through our social media platforms:</p>
         
-        <div className={`${styles.cardContainer}`} style={{ display: "flex", flexWrap: "wrap", gap: "4rem", marginTop: "3rem" }}>
+        <div className={`${styles.cardContainer}`}>
           {/* Instagram Card */}
             <Link
               href='https://www.instagram.com/nyu_rcc'

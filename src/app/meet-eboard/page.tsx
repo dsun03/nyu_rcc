@@ -23,24 +23,24 @@ export default function MeetEBoardPage() {
         <h1 className={styles.title}>Meet the E-Board</h1>
         <p className={styles.description}>Get to know our club&#39;s executive board members!</p>
         
-        <div className={styles.cardContainer} style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gridAutoRows: 'auto',
-            gap: '30px',
-            justifyItems: 'center',
-          }}>
+        <div className={`${styles.cardContainer} ${styles.eboard}`}>
           {eboardMembers.map((member, index) => (
-            <div key={index} className={styles.cardBox} style={{ flex: "1", minWidth: "250px", maxWidth: "300px", textAlign: "center" }}>
-              <img src={member.imageURL} alt={member.name} width={150} height={150} style={{
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                  boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-                  border: '2px solid #eee',
-                }} />
+            <div key={index} className={styles.cardBox}>
+              <img
+                src={member.imageURL}
+                alt={member.name}
+                width={150}
+                height={150}
+                style={{
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                  border: "2px solid #eee",
+                }}
+              />
               <h2>{member.name}</h2>
               <h3>{member.position}</h3>
-              <p> {member.bio}</p>
+              <p>{member.bio}</p>
             </div>
           ))}
         </div>

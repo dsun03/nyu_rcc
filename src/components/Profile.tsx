@@ -8,14 +8,15 @@ type Player = {
   created_at: string
 }
 
-export default function Profile({ Leaderboard, timeFormat }: {
+export default function Profile({ Leaderboard, timeFormat, showAll }: {
                 Leaderboard: Player[];
                 timeFormat: (seconds: number) => string;
+                showAll: boolean;
               }) {
   function Item(data: Player[]) {
     return (
         <div className={styles.leaderboardContainer}>
-          <h1 className={styles.leaderboardHeader}>Top 10 Solvers</h1>
+          <h1 className={styles.leaderboardHeader}>{showAll ? "All Solvers" : "Top 10 Solvers"}</h1>
             {data.map((value, index) => (
               <div key={index} className={`${styles.card} ${
                 index === 0

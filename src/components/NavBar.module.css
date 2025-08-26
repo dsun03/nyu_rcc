@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(55, 71, 133, 0.95);
+    background: rgba(55, 71, 133, 0.98);
     backdrop-filter: blur(10px);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -50,38 +50,169 @@
     color: #F8E9A1;
     font-size: 19px;
   }
-
   .dropdownWrapper {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
+  }
+  .dropdownWrapper > .navItem {
+  /* inherits .navItem styles already */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  
+  padding: 0; /* keep it tight like your links */
 }
-
-.dropdownMenu {
+  .dropdownMenu {
   position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  min-width: 120px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  top: 100%;    /* flush with the bottom of trigger */
+  left: 0;      /* align with trigger left edge */
+  background: rgba(55, 71, 133, 0.98);
+  border-radius: 0 0 6px 6px; /* rounded bottom only */
+  min-width: 160px;
   display: none;
-  z-index: 10;
+  flex-direction: column;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  z-index: 999;
 }
-
-.dropdownWrapper:hover .dropdownMenu {
-  display: block;
+.dropdownWrapper:hover .dropdownMenu,
+.dropdownWrapper.open .dropdownMenu {
+  display: flex;
 }
-
 .dropdownItem {
-  padding: 10px;
-  color: black;
-  text-align: center;
-  transition: background 0.2s ease;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 16px;
+  text-align: left;
+  background: rgba(68, 82, 138, 0.98);
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+  border-radius: 5%;
 }
 
 .dropdownItem:hover {
-  background: #f0f0f0;
+  background: rgba(248, 233, 161, 0.12); /* subtle highlight */
+  color: #F8E9A1;
+}
+/* Hamburger button (hidden on desktop) */
+.menuButton {
+  display: none;
+  border: 0;
+  background: transparent;
+  width: 44px;  /* good tap target */
+  height: 44px; /* good tap target */
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hamburger icon bars */
+.menuButton span,
+.menuButton::before,
+.menuButton::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+.menuButton span { top: 50%; transform: translate(-50%, -50%); }
+.menuButton::before { top: 14px; }
+.menuButton::after  { top: 28px; }
+
+.menuButton:focus-visible {
+  outline: 2px solid #F8E9A1;
+  outline-offset: 2px;
+}
+
+/* --- Mobile breakpoint: collapse into hamburger --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px; /* a bit tighter */
+  }
+
+  .menuButton {
+    display: inline-block; /* show hamburger on mobile */
+  }
+
+  /* Turn navLinks into a slide-down panel */
+  .navLinks {
+    position: fixed;
+    top: calc(60px + env(safe-area-inset-top)); /* adjust if your header height differs */
+    left: 0;
+    right: 0;
+    background: rgba(55, 71, 133, 0.98);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px 20px;
+
+    /* hidden by default */
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 999;
+  }
+
+  /* When header has .navOpen, show the panel */
+  .navOpen .navLinks {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Bigger tap targets */
+  .navItem {
+    font-size: 18px;
+    padding: 12px 4px;
+    border-radius: 8px;
+  }
+
+  .dropdownWrapper {
+    position: static;
+    width: 100%;
+    text-align: right;
+  
+  }
+  .dropdownWrapper .navItem{
+    background-color: rgba(55, 71, 133, 0.93);
+    border: 0;
+  }
+
+  .dropdownMenu {
+    position: static;
+    display: none; /* stays hidden until .open */
+    background: rgba(55, 71, 133, 0.98);
+    border: none;
+    border-radius: 8px;
+    margin-top: 6px;
+    box-shadow: none;
+    padding: 6px 0;
+  }
+
+  .dropdownWrapper.open .dropdownMenu {
+    display: block;
+  }
+
+  .dropdownItem {
+    display: block;
+    width: 100%;
+    padding: 14px 16px; /* larger tap target */
+    font-size: 18px;
+    border-radius: 6px;
+  }
+
+  .dropdownItem:active {
+    background: #ececec;
+  }
 }

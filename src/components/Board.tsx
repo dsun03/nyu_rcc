@@ -19,6 +19,7 @@ export default function Board() {
   const [inputMins, setInputMins] = useState('');
   const [inputSecs, setInputSecs] = useState('');
   const [data, setData] = useState<Player[] | null>(null);
+  const [showAll, setShowAll] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [solveTime, setSolveTime] = useState<string>('');
   const [rank, setRank] = useState<string>('');
@@ -28,8 +29,7 @@ export default function Board() {
   const fetchLeaderboard = async () => {
     const { data, error } = await supabase
       .from('leaderboard')
-      .select()
-      .limit(10);
+      .select();
     if (error) {
       console.error('Error fetching leaderboard:', error);
     } else {
@@ -191,6 +191,9 @@ export default function Board() {
         <button onClick={handleClick} data-id="0">
           All-Time
         </button>
+        <button onClick={() => setShowAll(o => !o)}>
+          {showAll ? "Show Top 10" : "Show All Users"}
+        </button>
       </div>
 
       {user && (
@@ -245,7 +248,12 @@ export default function Board() {
         )}
       </form>
 
-      {data && <Profile Leaderboard={filterByDate(data, period)} timeFormat = {formatTime}/>}
+      {data && <Profile Leaderboard={
+        showAll
+          ? filterByDate(data, period) // show ALL users
+          : filterByDate(data, period).slice(0, 10) // just Top 10
+        } timeFormat = {formatTime} 
+        showAll = {showAll}/>}
     </div>
   );
 }

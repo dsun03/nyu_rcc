@@ -1,0 +1,185 @@
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+  min-height: 100vh;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #A8D0E6, #F8E9A1);
+  color: #24305E;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 40px 20px;
+  margin-top: 50px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* responsive */
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 12px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .cardContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Force 1 column on phones */
+@media (max-width: 600px) {
+  .cardContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The clickable card “box” */
+.textBox {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 22px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Make only the content clickable if you wrap <a> inside .textBox */
+.cardLinkWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+.cardLinkWrapper:focus-visible {
+  outline: 2px solid #374785;
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+/* Hover effect */
+.textBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+}
+
+/* Icon inside each card */
+.textBox :is(img, .icon) {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* Headings + copy */
+.textBox h2 {
+  font-size: 1.35rem;
+  margin: 6px 0 4px;
+}
+
+.textBox p {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0;
+}
+
+/* Variant colors (desktop tilt OK) */
+.leftAlign {
+  background: #F76C6C;
+  color: #fff;
+  transform: rotate(-1deg);
+}
+.middleAlign {
+  background: #F8E9A1;
+  color: #374785;
+}
+.rightAlign {
+  background: #A8D0E6;
+  color: #24305E;
+  transform: rotate(1deg);
+}
+
+/* Mobile / Tablet */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 24px 16px;
+    margin-top: 64px;
+  }
+
+  .title { font-size: 1.9rem; }
+  .description { font-size: 1rem; }
+
+  .cardContainer { gap: 16px; }
+
+  .textBox {
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+
+  /* Remove tilts on small screens to avoid overflow */
+  .leftAlign, .rightAlign { transform: none; }
+
+  .textBox :is(img, .icon) {
+    width: 84px;
+    height: 84px;
+  }
+
+  .textBox h2 { font-size: 1.15rem; }
+  .textBox p  { font-size: 0.95rem; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .title { font-size: 1.65rem; }
+  .description { font-size: 0.95rem; }
+
+  .textBox { padding: 16px 14px; }
+  .textBox h2 { font-size: 1.05rem; }
+  .textBox p  { font-size: 0.9rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .textBox { transition: none !important; }
+}
