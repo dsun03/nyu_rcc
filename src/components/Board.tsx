@@ -192,7 +192,7 @@ export default function Board() {
           All-Time
         </button>
         <button onClick={() => setShowAll(o => !o)}>
-          {showAll ? "Show Top 10" : "Show All Users"}
+          {showAll ? "Show Top 10" : "Show All Records"}
         </button>
       </div>
 
